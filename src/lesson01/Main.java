@@ -1,4 +1,4 @@
-package main.subpackage;
+package lesson01;
 
 /**
  * Vovik
