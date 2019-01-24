@@ -8,17 +8,27 @@ import java.util.Objects;
  */
 
 public class Link {
+    private static Link EMPTY = new Link();
     private final String name;
     private final String url;
 
-    public Link(String name, String url) {
+    private Link(String name, String url) {
         this.name = name;
         this.url = url;
     }
 
     public Link(Link link) {
-        this.name = link.name;
-        this.url = link.url;
+        this(link.name, link.url);
+       // this.name = link.name;
+       // this.url = link.url;
+    }
+
+    private Link() {
+        this("",null);
+    }
+
+    public static Link empty(){
+        return EMPTY;
     }
 
     @Override

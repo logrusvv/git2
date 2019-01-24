@@ -1,6 +1,7 @@
 package vovik.java.webapp.model;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Vovik
@@ -9,5 +10,7 @@ import java.util.Collection;
 
 public class Resume {
     private String fullName;
-    Collection<String> collection;
+    private String location;
+    private List<Contact> contacts;
+    private List<Section> sections;
 }
