@@ -6,10 +6,20 @@ package vovik.java.webapp.model;
  */
 
 public enum ContactType {
-    PHONE,
-    MOBILE,
-    HOME_PHONE,
-    SKYPE,
-    VIBER,
-    MAIL
+    PHONE("Тел."),
+    MOBILE("Мобильный"),
+    HOME_PHONE("Домашний тел."),
+    SKYPE("Skype"),
+    VIBER("Почта"),
+    MAIL("Viber");
+
+    private String title;
+
+    ContactType(String title) {
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
 }
