@@ -12,7 +12,7 @@ public class Link {
     private final String name;
     private final String url;
 
-    private Link(String name, String url) {
+    public Link(String name, String url) {
         this.name = name;
         this.url = url;
     }
@@ -23,7 +23,7 @@ public class Link {
        // this.url = link.url;
     }
 
-    private Link() {
+    public Link() {
         this("",null);
     }
 
@@ -52,4 +52,13 @@ public class Link {
                 ", url='" + url + '\'' +
                 '}';
     }
+
+    public String getName() {
+        return name;
+    }
+/*
+    public String getUrl() {
+        return url;
+    }
+*/
 }
