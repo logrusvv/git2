@@ -42,7 +42,7 @@ public class ArrayStorageTest {
         R2.addContact((new Contact(ContactType.SKYPE, "skype2")));
         R2.addContact(new Contact(ContactType.PHONE, "22222"));
 
-        R3 = new Resume("Поное Имя3", null);
+        R3 = new Resume("Полное Имя3", null);
 
         storage.clear();
         storage.save(R3);
@@ -61,6 +61,8 @@ public class ArrayStorageTest {
 
     @org.junit.Test
     public void update() {
+//        Resume R4 = new Resume(R2);  // think about this realization
+
         R2.setFullName("Updated N2");
         storage.update(R2);
         assertEquals(R2, storage.load((R2.getUuid())));

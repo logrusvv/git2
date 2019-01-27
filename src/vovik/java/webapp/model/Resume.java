@@ -25,6 +25,10 @@ public class Resume implements Comparable<Resume> {
         this.location = location;
     }
 
+    public Resume(Resume r){
+        this(r.uuid,r.fullName,r.location);
+    }
+
 
     public void addSection(Section section){
         sections.add(section);
