@@ -87,7 +87,7 @@ public class ArrayStorage implements IStorage {
 
     @Override
     public int size() {
-        return 0;
+        return size;
     }
 
     private int getIndex(String uuid) {
