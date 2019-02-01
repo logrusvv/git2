@@ -12,9 +12,9 @@ import java.util.logging.Logger;
  * 1/27/2019
  */
 
-public class ArrayStorage implements IStorage {
+public class ArrayStorage extends AbstractStorage {
     private static final int LIMIT = 100;
-    // protected Logger LOGGER = Logger.getLogger(getClass().getName());
+    // protected Logger logger = Logger.getLogger(getClass().getName());
     private static Logger LOGGER = Logger.getLogger(ArrayStorage.class.getName());
     private Resume[] array = new Resume[LIMIT];
     private int size;
