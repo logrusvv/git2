@@ -106,4 +106,9 @@ public class Resume implements Comparable<Resume> {
     public int compareTo(Resume o) {
         return fullName.compareTo(o.fullName);
     }
+
+    @Override
+    public String toString() {
+        return "fullName " + fullName + " (" + uuid + ")";
+    }
 }
