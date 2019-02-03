@@ -13,8 +13,8 @@ import java.util.logging.Logger;
  * 1/27/2019
  */
 
-public class ArrayStorage extends AbstractStorage {
-    private static final int LIMIT = 100;
+public class ArrayStorage extends AbstractStorage<Integer> {
+    private static final int LIMIT = 10000;
 
     private Resume[] array = new Resume[LIMIT];
     private int size;
@@ -26,14 +26,32 @@ public class ArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected boolean exists(String uuid) {
-        return getIndex(uuid) != -1;
+    protected boolean exist(Integer idx) {
+        return idx != -1;
+    }
+
+    @Override
+    protected void doUpdate(Integer idx, Resume r) {
+        array[idx] = r;
+    }
+
+    @Override
+    protected Resume doLoad(Integer idx) {
+        return array[idx];
     }
 
 
+    @Override
+    protected void doDelete(Integer idx) {
+        int numMoved = size - idx - 1;
+        if (numMoved > 0) {
+            System.arraycopy(array, idx + 1, array, idx, numMoved);
+        }
+        array[--size] = null;
+    }
 
     @Override
-    protected void doSave(Resume r) {
+    protected void doSave(Integer ctx, Resume r) {
         array[size++] = r;
 /*
 
@@ -53,40 +71,11 @@ public class ArrayStorage extends AbstractStorage {
     }
 
     @Override
-    protected void doUpdate(Resume r) {
-        int idx = getIndex(r.getUuid());
-        if (idx == -1) throw new WebAppException("Resume " + r.getUuid() + "not exist", r);
-        array[idx] = r;
-    }
-
-    @Override
-    protected Resume doLoad(String uuid) {
-        int idx = getIndex(uuid);
-        return array[idx];
-    }
-
-
-    @Override
-    protected void doDelete(String uuid) {
-        int idx = getIndex(uuid);
-        int numMoved = size - idx - 1;
-        if (numMoved > 0) {
-            System.arraycopy(array, idx + 1, array, idx, numMoved);
-        }
-        array[--size] = null;
-    }
-
-    @Override
-    protected List<Resume> doGetAll() {
-        return Arrays.asList(Arrays.copyOf(array, size));
-    }
-
-    @Override
     public int size() {
         return size;
     }
 
-    private int getIndex(String uuid) {
+    protected Integer getContext(String uuid) {
         for (int i = 0; i < LIMIT; i++) {
             if (array[i] != null) {
                 if (array[i].getUuid().equals(uuid)) {
@@ -96,5 +85,10 @@ public class ArrayStorage extends AbstractStorage {
 
         }
         return -1;
+    }
+
+    @Override
+    protected List<Resume> doGetAll() {
+        return Arrays.asList(Arrays.copyOf(array, size));
     }
 }
