@@ -6,5 +6,5 @@ package vovik.java.webapp.model;
  */
 
 public class Section {
-    protected String type;
+
 }
