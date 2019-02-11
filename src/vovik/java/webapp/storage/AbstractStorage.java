@@ -4,6 +4,7 @@ import vovik.java.webapp.WebAppException;
 import vovik.java.webapp.model.Link;
 import vovik.java.webapp.model.Resume;
 
+import java.io.IOException;
 import java.util.*;
 import java.util.logging.Logger;
 
@@ -50,7 +51,7 @@ abstract public class AbstractStorage<C> implements IStorage {
         doUpdate(ctx, r);
     }
 
-    protected abstract void doUpdate(C ctx, Resume r);
+    protected abstract void doUpdate(C ctx, Resume r) throws IOException;
 
     @Override
     public Resume load(String uuid) {

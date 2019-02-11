@@ -17,6 +17,12 @@ public class Resume implements Comparable<Resume> {
     //private List<Contact> contacts = new LinkedList<>();
     //private List<Section> sections = new LinkedList<>();
 
+    public static final Resume EMPTY;
+
+    static {
+        EMPTY = new Resume();
+     }
+
     public Resume(String fullName, String location) {
         this(UUID.randomUUID().toString(), fullName, location);
     }
@@ -32,6 +38,14 @@ public class Resume implements Comparable<Resume> {
     }
 
     public Resume() {
+    }
+
+    public Map<ContactType, String> getContacts() {
+        return contacts;
+    }
+
+    public Map<SectionType, Section> getSections() {
+        return sections;
     }
 
     public void addSection(SectionType type, Section section){

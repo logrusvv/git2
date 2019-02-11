@@ -29,6 +29,7 @@ abstract public class AbstractStorageTest {
     public static void beforeClass() {
         // the same as static {}
     }
+/*
 
     @Before
     public void before() {
@@ -47,6 +48,7 @@ abstract public class AbstractStorageTest {
         storage.save(R1);
         storage.save(R2);
     }
+*/
 
     @org.junit.Test
     public void clear() {

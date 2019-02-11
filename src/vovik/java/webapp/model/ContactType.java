@@ -22,4 +22,6 @@ public enum ContactType {
     public String getTitle() {
         return title;
     }
+
+    public static ContactType[] VALUES = ContactType.values();
 }
