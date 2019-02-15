@@ -1,5 +1,6 @@
 package vovik.java.webapp.model;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -7,7 +8,8 @@ import java.util.*;
  * 1/22/2019
  */
 
-public class Resume implements Comparable<Resume> {
+public class Resume implements Serializable {
+    public static long serialVersionUID = 1L;
     private String uuid;
     private String fullName;
     private String location;
@@ -104,6 +106,14 @@ public class Resume implements Comparable<Resume> {
         this.homePage = homePage;
     }
 
+    public void addObjective(String value){
+        addSection(SectionType.OBJECTIVE, new TextSection(value));
+    }
+
+    public void addMultiTextSection(SectionType type, String... values){
+        addSection(type, new MultiTextSection(values));
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(uuid, fullName, location, homePage, contacts, sections);
@@ -126,7 +136,7 @@ public class Resume implements Comparable<Resume> {
                 && Objects.equals(this.sections, other.sections);
     }
 
-    @Override
+    //@Override
     public int compareTo(Resume o) {
         return fullName.compareTo(o.fullName);
     }

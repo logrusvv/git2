@@ -7,6 +7,7 @@ import vovik.java.webapp.WebAppException;
 import vovik.java.webapp.model.Contact;
 import vovik.java.webapp.model.ContactType;
 import vovik.java.webapp.model.Resume;
+import vovik.java.webapp.model.SectionType;
 
 import java.util.Arrays;
 
@@ -29,17 +30,17 @@ abstract public class AbstractStorageTest {
     public static void beforeClass() {
         // the same as static {}
     }
-/*
+
 
     @Before
     public void before() {
         R1 = new Resume("Полное Имя1", "location1");
-        R1.addContact((new Contact(ContactType.MAIL, "mail1@ya.ru")));
-        R1.addContact(new Contact(ContactType.PHONE, "11111"));
+        R1.addContact(ContactType.MAIL, "mail1@ya.ru");
+        R1.addContact(ContactType.PHONE, "11111");
 
         R2 = new Resume("Полное Имя2", null);
-        R2.addContact((new Contact(ContactType.SKYPE, "skype2")));
-        R2.addContact(new Contact(ContactType.PHONE, "22222"));
+        R2.addContact(ContactType.SKYPE, "skype2");
+        R2.addContact(ContactType.PHONE, "22222");
 
         R3 = new Resume("Полное Имя3", null);
 
@@ -47,8 +48,12 @@ abstract public class AbstractStorageTest {
         storage.save(R3);
         storage.save(R1);
         storage.save(R2);
+/*        R1.addObjective("Objective1");
+        R1.addMultiTextSection(SectionType.ACHIEVEMENT, "Achivment11", "Achivment12");
+        R1.addMultiTextSection(SectionType.QUALIFICATIONS, "Java", "Sql");*/
+        // TODO add EXPERIENCE and EDUCATION
     }
-*/
+
 
     @org.junit.Test
     public void clear() {

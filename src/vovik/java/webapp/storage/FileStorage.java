@@ -5,6 +5,8 @@ import vovik.java.webapp.model.ContactType;
 import vovik.java.webapp.model.Resume;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -73,7 +75,11 @@ public abstract class FileStorage extends AbstractStorage<File> {
 
     @Override
     protected List<Resume> doGetAll() {
-        return null;
+        File[] files = dir.listFiles();
+        if(files == null) return Collections.emptyList();
+        List<Resume> list = new ArrayList<>(files.length);
+        for(File file : files) list.add(read(file));
+        return list;
     }
 
     @Override

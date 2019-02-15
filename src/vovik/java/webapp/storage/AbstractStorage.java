@@ -51,7 +51,7 @@ abstract public class AbstractStorage<C> implements IStorage {
         doUpdate(ctx, r);
     }
 
-    protected abstract void doUpdate(C ctx, Resume r) throws IOException;
+    protected abstract void doUpdate(C ctx, Resume r);
 
     @Override
     public Resume load(String uuid) {
