@@ -12,7 +12,7 @@ import java.util.Map;
  * Vovik
  * 2/9/2019
  */
-
+/*
 public class DateStreamFileStorage extends FileStorage {
 
     private static final String NULL = "null";
@@ -35,7 +35,7 @@ public class DateStreamFileStorage extends FileStorage {
             // TODO section implementation
         } catch (IOException e) {
             throw new WebAppException("Couldn't write file " + file.getAbsolutePath(), r, e);
-        }
+        }[[]]
     }
 
     protected Resume read(File file) {
@@ -66,3 +66,4 @@ public class DateStreamFileStorage extends FileStorage {
     }
 
 }
+*/
