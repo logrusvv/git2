@@ -1,5 +1,7 @@
 package vovik.java.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -12,7 +14,8 @@ import java.util.Objects;
 
 public class MultiTextSection extends Section {
     static final long serialVersionUID = 1L;
-    private List<String> values;
+
+    private List<String> values = new LinkedList<>();
 
     public MultiTextSection(String... values){
         this(new LinkedList<>(Arrays.asList(values)));
@@ -23,6 +26,9 @@ public class MultiTextSection extends Section {
     }
     public List<String> getValues(){
         return values;
+    }
+
+    public MultiTextSection() {
     }
 
     @Override
@@ -41,4 +47,10 @@ public class MultiTextSection extends Section {
         final MultiTextSection other = (MultiTextSection) obj;
         return Objects.equals(this.values, other.values);
     }
+
+    @Override
+    public String toString() {
+        return values.toString();
+    }
+
 }

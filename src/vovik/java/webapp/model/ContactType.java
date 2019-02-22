@@ -11,9 +11,19 @@ public enum ContactType implements Serializable {
     PHONE("Тел."),
     MOBILE("Мобильный"),
     HOME_PHONE("Домашний тел."),
-    SKYPE("Skype"),
+    SKYPE("Skype"){
+        @Override
+        public String toHtml(String value){
+            return "<a href='skype:" + value + "'>" + value + "</a>";
+        }
+    },
     VIBER("Почта"),
-    MAIL("Viber");
+    MAIL("Viber"){
+        @Override
+        public String toHtml(String value){
+            return "<a href='mailto:" + value + "'>" + value + "</a>";
+        }
+    };
 
     private String title;
 
@@ -26,4 +36,8 @@ public enum ContactType implements Serializable {
     }
 
     public static ContactType[] VALUES = ContactType.values();
+
+    public String toHtml(String value){
+        return title + ": " + value;
+    }
 }

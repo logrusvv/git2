@@ -1,20 +1,33 @@
 package vovik.java.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * Vovik
  * 1/23/2019
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Link implements Serializable {
 
-public class Link {
+    static final long serialVersionUID = 1L;
+
     private static Link EMPTY = new Link();
+
     private final String name;
     private final String url;
 
+
+    public Link() {
+        this("", "");
+    }
+
     public Link(String name, String url) {
+        Objects.requireNonNull(name, "name is null");
         this.name = name;
-        this.url = url;
+        this.url = url == null ? "" : url;
     }
 
     public Link(Link link) {
@@ -23,9 +36,6 @@ public class Link {
        // this.url = link.url;
     }
 
-    public Link() {
-        this("",null);
-    }
 
     public static Link empty(){
         return EMPTY;
@@ -56,9 +66,9 @@ public class Link {
     public String getName() {
         return name;
     }
-/*
+
     public String getUrl() {
         return url;
     }
-*/
+
 }
