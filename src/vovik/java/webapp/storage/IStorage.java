@@ -1,5 +1,6 @@
 package vovik.java.webapp.storage;
 
+import vovik.java.webapp.WebAppException;
 import vovik.java.webapp.model.Resume;
 
 import java.util.Collection;
@@ -12,7 +13,7 @@ import java.util.Collection;
 public interface IStorage {
     void clear();
 
-    void save(Resume r);
+    void save(Resume r) throws WebAppException;
 
     void update(Resume r);
 
@@ -23,4 +24,6 @@ public interface IStorage {
     Collection<Resume> getAllSorted();
 
     int size();
+
+    boolean isSectionSupported();
 }

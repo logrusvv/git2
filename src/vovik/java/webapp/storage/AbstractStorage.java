@@ -1,11 +1,16 @@
 package vovik.java.webapp.storage;
 
 import vovik.java.webapp.WebAppException;
+import vovik.java.webapp.model.Resume;
+
+import vovik.java.webapp.WebAppException;
 import vovik.java.webapp.model.Link;
 import vovik.java.webapp.model.Resume;
 
-import java.io.IOException;
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -98,6 +103,11 @@ abstract public class AbstractStorage<C> implements IStorage {
         return Collections.singletonList(new Resume());
 */
         return list;
+    }
+
+    @Override
+    public boolean isSectionSupported() {
+        return true;
     }
 
     protected abstract List<Resume> doGetAll();

@@ -1,14 +1,12 @@
 package vovik.java.webapp.storage;
 
 import vovik.java.webapp.WebAppException;
-import vovik.java.webapp.model.ContactType;
 import vovik.java.webapp.model.Resume;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Vovik
@@ -28,14 +26,14 @@ public abstract class FileStorage extends AbstractStorage<File> {
     protected void doClear() {
         File[] files = dir.listFiles();
         if (files == null) return;
-        for (File file: files){
+        for (File file : files) {
             doDelete(file);
         }
     }
 
     @Override
     protected File getContext(String fileName) {
-        return new File(fileName);
+        return new File(dir, fileName);
     }
 
     @Override
@@ -46,46 +44,63 @@ public abstract class FileStorage extends AbstractStorage<File> {
     @Override
     protected void doSave(File file, Resume r) {
         try {
-            file.createNewFile();
+            if(!file.createNewFile()){
+                throw new WebAppException("Couldn't create file " + file.getAbsolutePath(), r);
+            }
         } catch (IOException e) {
             throw new WebAppException("Couldn't create file " + file.getAbsolutePath(), r, e);
         }
         write(file, r);
     }
 
-     abstract protected void write(File file, Resume r);
+    protected void write(File file, Resume r) {
+        try {
+            write(new FileOutputStream(file), r);
+        } catch (IOException e) {
+            throw new WebAppException("Couldn't write file " + file.getAbsolutePath(), r, e);
+        }
+    }
+
+    protected Resume read(File file) {
+        try {
+            return read(new FileInputStream(file));
+        } catch (IOException e) {
+            throw new WebAppException("Couldn't read file " + file.getAbsolutePath(), e);
+        }
+    }
+
+    abstract protected void write(OutputStream os, Resume r) throws IOException;
+
+    abstract protected Resume read(InputStream is) throws IOException;
 
     @Override
     protected void doUpdate(File file, Resume r) {
         write(file, r);
     }
 
-    abstract protected Resume read(File file);
-
     @Override
     protected Resume doLoad(File file) {
-        //TODO
         return read(file);
     }
 
     @Override
     protected void doDelete(File file) {
-        if(!file.delete()) throw new WebAppException("File" + file.getAbsolutePath() + " can not be deleted");
+        if (!file.delete()) throw new WebAppException("File " + file.getAbsolutePath() + " can not be deleted");
     }
 
     @Override
     protected List<Resume> doGetAll() {
         File[] files = dir.listFiles();
-        if(files == null) return Collections.emptyList();
+        if (files == null) return Collections.emptyList();
         List<Resume> list = new ArrayList<>(files.length);
-        for(File file : files) list.add(read(file));
+        for (File file : files) list.add(read(file));
         return list;
     }
 
     @Override
     public int size() {
         String[] list = dir.list();
-        if(list == null) throw new WebAppException("Couldn't read directory" + dir.getAbsolutePath());
+        if (list == null) throw new WebAppException("Couldn't read directory " + dir.getAbsolutePath());
         return list.length;
     }
 }
