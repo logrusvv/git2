@@ -1,19 +1,28 @@
 package vovik.java.webapp.model;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
-import java.util.*;
+import java.util.EnumMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * Vovik
  * 1/22/2019
  */
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.FIELD)
 
 public class Resume implements Serializable {
     public static long serialVersionUID = 1L;
+
     private String uuid;
     private String fullName;
-    private String location;
-    private String homePage;
+    private String location = "";
+    private String homePage = "";
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
     private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
     //private List<Contact> contacts = new LinkedList<>();
@@ -30,17 +39,31 @@ public class Resume implements Serializable {
     }
 
     public Resume(String uuid, String fullName, String location) {
-        this.uuid = uuid;
-        this.fullName = fullName;
-        this.location = location;
+        this(uuid, fullName, location, "");
     }
 
     public Resume(Resume r){
         this(r.uuid,r.fullName,r.location);
     }
 
+    public Resume(String uuid, String fullName, String location, String homePage) {
+        Objects.requireNonNull(uuid, "uuid is null");
+        Objects.requireNonNull(fullName, "fullName is null");
+        Objects.requireNonNull(location, "location is null");
+        Objects.requireNonNull(homePage, "homePage is null");
+        this.uuid = uuid;
+        this.fullName = fullName;
+        this.location = location;
+    }
+
     public Resume() {
     }
+
+    public Resume(String uuid) {
+        this.uuid = uuid;
+
+    }
+
 
     public Map<ContactType, String> getContacts() {
         return contacts;
@@ -114,9 +137,13 @@ public class Resume implements Serializable {
         addSection(type, new MultiTextSection(values));
     }
 
+    public void addOrganizationSection(SectionType type, Organization... organizations) {
+        addSection(type, new OrganizationSection(organizations));
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(uuid, fullName, location, homePage, contacts, sections);
+        return uuid.hashCode();
     }
 
     @Override
@@ -143,6 +170,18 @@ public class Resume implements Serializable {
 
     @Override
     public String toString() {
-        return "fullName " + fullName + " (" + uuid + ")";
+        return "Resume{" +
+                "uuid='" + uuid + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", location='" + location + '\'' +
+                ", homePage='" + homePage + '\'' +
+                ", contacts=" + contacts +
+                ", sections=" + sections +
+                '}';
+    }
+
+
+    public void removeContact(ContactType type) {
+        contacts.remove(type);
     }
 }
