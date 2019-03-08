@@ -6,7 +6,8 @@ package vovik.java.webapp.storage;
  */
 
 public class SerializeFileStorageTest extends AbstractStorageTest {
+
     {
-        storage = new SerializeFileStorage("./file_storage");
+        storage = new SerializeFileStorage(FILE_STORAGE);
     }
 }

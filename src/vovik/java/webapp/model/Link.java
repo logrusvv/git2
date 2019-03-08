@@ -14,7 +14,7 @@ public class Link implements Serializable {
 
     static final long serialVersionUID = 1L;
 
-    private static Link EMPTY = new Link();
+    public static Link EMPTY = new Link();
 
     private final String name;
     private final String url;

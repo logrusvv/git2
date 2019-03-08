@@ -5,8 +5,8 @@ package vovik.java.webapp.storage;
  * 2/1/2019
  */
 
-public class MapStorageTest extends  AbstractStorageTest {
+public class MapStorageTest extends AbstractStorageTest {
     {
-//        storage = new MapStorage();
+        storage = new MapStorage();
     }
 }

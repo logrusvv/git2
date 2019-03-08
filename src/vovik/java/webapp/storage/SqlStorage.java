@@ -3,7 +3,7 @@ package vovik.java.webapp.storage;
 import vovik.java.webapp.WebAppException;
 import vovik.java.webapp.model.ContactType;
 import vovik.java.webapp.model.Resume;
-import vovik.java..webapp.sql.Sql;
+import vovik.java.webapp.sql.Sql;
 import vovik.java.webapp.util.Util;
 
 import java.sql.*;
@@ -165,3 +165,4 @@ public class SqlStorage implements IStorage {
                     return null;
                 });
     }
+}
