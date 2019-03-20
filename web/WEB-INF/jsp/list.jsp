@@ -32,9 +32,7 @@
                         <th>&nbsp;</th>
                     </tr>
                     <%
-                        XmlFileStorage storage = new XmlFileStorage("D:\\java\\project_test\\webapp5\\file_storage");
-                        Collection<Resume> resumes = storage.getAllSorted();
-                        //Collection<Resume> resumes = WebAppConfig.get().getStorage().getAllSorted();
+                        Collection<Resume> resumes = WebAppConfig.get().getStorage().getAllSorted();
                         request.setAttribute("resumeList", resumes);
                     %>
                     <c:forEach items="${resumeList}" var="resume">

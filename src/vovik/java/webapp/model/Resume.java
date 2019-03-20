@@ -15,24 +15,22 @@ import java.util.UUID;
  */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-
 public class Resume implements Serializable {
-    public static long serialVersionUID = 1L;
+    static final long serialVersionUID = 1L;
 
     private String uuid;
     private String fullName;
     private String location = "";
     private String homePage = "";
     private Map<ContactType, String> contacts = new EnumMap<>(ContactType.class);
+
     private Map<SectionType, Section> sections = new EnumMap<>(SectionType.class);
-    //private List<Contact> contacts = new LinkedList<>();
-    //private List<Section> sections = new LinkedList<>();
 
     public static final Resume EMPTY;
 
     static {
         EMPTY = new Resume();
-     }
+    }
 
     public Resume(String fullName, String location) {
         this(UUID.randomUUID().toString(), fullName, location);
@@ -40,10 +38,6 @@ public class Resume implements Serializable {
 
     public Resume(String uuid, String fullName, String location) {
         this(uuid, fullName, location, "");
-    }
-
-    public Resume(Resume r){
-        this(r.uuid,r.fullName,r.location);
     }
 
     public Resume(String uuid, String fullName, String location, String homePage) {
@@ -64,7 +58,6 @@ public class Resume implements Serializable {
 
     }
 
-
     public Map<ContactType, String> getContacts() {
         return contacts;
     }
@@ -73,11 +66,15 @@ public class Resume implements Serializable {
         return sections;
     }
 
-    public void addSection(SectionType type, Section section){
+    public void addSection(SectionType type, Section section) {
         sections.put(type, section);
     }
 
-    public void addContact(ContactType type, String value){
+    public String getContact(ContactType type) {
+        return contacts.get(type);
+    }
+
+    public void addContact(ContactType type, String value) {
         contacts.put(type, value);
     }
 
@@ -97,24 +94,8 @@ public class Resume implements Serializable {
         return homePage;
     }
 
-/*    public List<Contact> getContacts() {
-        return contacts;
-    }
-
-    public List<Section> getSections() {
-        return sections;
-    }
-*/
-    public String getContact(ContactType type){
-        return contacts.get(type);
-    }
-
-    public Section getSections(SectionType type){
+    public Section getSection(SectionType type) {
         return sections.get(type);
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public void setFullName(String fullName) {
@@ -129,11 +110,11 @@ public class Resume implements Serializable {
         this.homePage = homePage;
     }
 
-    public void addObjective(String value){
+    public void addObjective(String value) {
         addSection(SectionType.OBJECTIVE, new TextSection(value));
     }
 
-    public void addMultiTextSection(SectionType type, String... values){
+    public void addMultiTextSection(SectionType type, String... values) {
         addSection(type, new MultiTextSection(values));
     }
 
@@ -155,15 +136,10 @@ public class Resume implements Serializable {
             return false;
         }
         final Resume other = (Resume) obj;
-        return Objects.equals(this.uuid, other.uuid)
-                && Objects.equals(this.fullName, other.fullName)
-                && Objects.equals(this.location, other.location)
-                && Objects.equals(this.homePage, other.homePage)
-                && Objects.equals(this.contacts, other.contacts)
-                && Objects.equals(this.sections, other.sections);
+        return Objects.equals(this.uuid, other.uuid) && Objects.equals(this.fullName, other.fullName) && Objects.equals(this.location, other.location) && Objects.equals(this.homePage, other.homePage) && Objects.equals(this.contacts, other.contacts) && Objects.equals(this.sections, other.sections);
     }
 
-    //@Override
+    //    @Override
     public int compareTo(Resume o) {
         return fullName.compareTo(o.fullName);
     }
@@ -180,8 +156,23 @@ public class Resume implements Serializable {
                 '}';
     }
 
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
+    }
 
     public void removeContact(ContactType type) {
         contacts.remove(type);
     }
+
+/*
+    private String getEmail(List<Contact> list) {
+        for (Contact c : list) {
+            if (c.getType() == ContactType.MAIL) {
+                return c.getValue();
+            }
+        }
+        return null;
+    }
+*/
+
 }

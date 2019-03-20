@@ -48,7 +48,7 @@
         </dl>
         <h3>Контакты:</h3>
         <p>
-        <c:forEach var="type" items="<%=ContactType.values()%>">
+            <c:forEach var="type" items="<%=ContactType.values()%>">
         <dl>
             <dt>${type.title}</dt>
             <dd><input type="text" name="${type.name()}" size=30 value="${resume.getContact(type)}"></dd>
@@ -57,7 +57,7 @@
 
         <c:forEach var="type" items="<%=SectionType.values()%>">
             <h3><a>${type.title}</a></h3>
-            ${type.htmlType.toHtml(resume.getSection(type), type)}
+
         </c:forEach>
         <hr>
         <button type="submit">Сохранить</button>
@@ -67,4 +67,3 @@
 </section>
 <jsp:include page="fragments/footer.jsp"/>
 </body>
-</html>

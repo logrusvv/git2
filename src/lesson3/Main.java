@@ -1,6 +1,5 @@
 package lesson3;
 
-import vovik.java.webapp.model.Contact;
 import vovik.java.webapp.model.ContactType;
 import vovik.java.webapp.model.Link;
 
@@ -13,7 +12,7 @@ import java.lang.reflect.Field;
 
 public class Main {
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
-        Contact c = new Contact(ContactType.PHONE,"113131");
+        //Contact c = new Contact(ContactType.PHONE,"113131");
 
         Field f = Link.class.getDeclaredField("url");
         f.setAccessible(true);
